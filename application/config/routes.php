@@ -55,3 +55,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['profiles'] = 'profiles';
 $route['profiles/(:any)'] = 'profiles/profile/$1';
+$route['uploads'] = 'uploads';
+$route['profiles/(:num)'] = 'profiles/$1';
+$route['editor'] = 'editor';
+$route['editor/add'] = 'editor/add';
+$route['editor/edit/(:any)'] = 'editor/edit/$1';
+$route['search/(:any)'] = 'search/$1';

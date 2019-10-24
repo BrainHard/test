@@ -77,6 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
+	<?php if('http://localhost' . $_SERVER['REQUEST_URI'] != base_url()): ?><h3><a href="<?php echo base_url() ?>">Назад на главную</a></h3><?php endif; ?>
 	<div id="container">
 		<h1><?php echo $heading; ?></h1>
 		<div id="body">

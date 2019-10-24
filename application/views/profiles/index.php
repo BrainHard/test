@@ -1,18 +1,35 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1><?php echo $title ?></h1>
-      <div class="row">
-        <?php foreach ($profiles as $profile): ?>
-          <div class="profiles-container col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-12 profile-container">
-                <h2><a href="index.php/profiles/profile/<?php echo $profile['slug'] ?>"><?php echo $profile['name'] . ' ' . $profile['surname'] ?></a></h2>
-            </div>
-          </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
+<div class="col-sm-12">
+  <div class="col-sm-4">
+    <h1><?php echo $title ?></h1>
+  </div>
+  <div class="col-sm-4">
+    <h1><a href="<?php echo $add_link ?>"><?php echo $add_text ?></a></h1>
+  </div>
+  <div class="col-sm-4">
+    <div class="search-container">
+      <?php echo form_open('search/') ?>
+      <?php echo form_input(['name' => 'search', 'placeholder' => 'Поиск...', 'class' => 'search-input']) ?>
+      <?php echo form_submit(['name' => 'search-submit', 'value' => 'поиск', 'class' => 'search-submit']) ?>
+      <?php echo form_close() ?>
     </div>
+  </div>
+  <div class="row">
+    <?php foreach ($profiles as $profile): ?>
+      <a href="index.php/profiles/profile/<?php echo $profile['slug'] ?>"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+        <div class="profiles-container">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+              <div class="profile-container">
+                <img src="<?php echo base_url($profile['avatar']) ?>" alt="">
+                <h2><?php echo $profile['name'] . ' ' . $profile['surname'] ?></h2>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div></a>
+    <?php endforeach; ?>
+  </div>
+  <div class="pagination col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <?php echo $pagination ?>
   </div>
 </div>

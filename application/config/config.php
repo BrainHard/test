@@ -469,3 +469,7 @@ $config['time_reference'] = 'local';
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['total_rows'] = 200;
+
+$config['per_page'] = 1;

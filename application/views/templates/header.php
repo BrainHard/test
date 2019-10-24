@@ -14,3 +14,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="container">
+  <div class="row">
+    <?php if('http://localhost' . $_SERVER['REQUEST_URI'] != base_url()): ?><h3><a href="<?php echo base_url() ?>">Назад на главную</a></h3><?php endif; ?>
