@@ -18,7 +18,7 @@
       return $query->row_array();
     }
 
-    public function addProfile($data) {
+    public function addProfile($data, $image = '/uploads/undefined.png') {
       $slug = strtolower(convert_accented_characters($data['surname']));
 
       $slug = $this->slugUnique($slug);
@@ -30,12 +30,13 @@
                   'birth' => $data['birth'],
                   'address' => $data['address'],
                   'phone' => $data['phone'],
-                  'slug' => $slug
+                  'slug' => $slug,
+                  'avatar' => $image
       );
       $this->db->insert('profiles', $fields);
     }
 
-    public function editProfile($data, $slug) {
+    public function editProfile($data, $slug, $image = '/uploads/undefined.png') {
       $fields = array(
                   'name' => $data['name'],
                   'surname' => $data['surname'],
@@ -43,7 +44,8 @@
                   'birth' => $data['birth'],
                   'address' => $data['address'],
                   'phone' => $data['phone'],
-                  'slug' => $slug
+                  'slug' => $slug,
+                  'avatar' => $image
       );
       $this->db->replace('profiles', $fields);
     }

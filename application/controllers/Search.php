@@ -6,14 +6,19 @@
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('profiles_model');
+        $this->load->model('search_model');
         $this->load->helper('form');
-        $this->load->helper('text');
 
     }
 
-    public function searching ($needle) {
-      
+    public function searching () {
+      $data['profiles'] = $this->search_model->searchResults($this->input->post()['search']);
+      $data['title'] = 'Результаты поиска';
+
+
+      $this->load->view('templates/header', $data);
+      $this->load->view('search', $data);
+      $this->load->view('templates/footer');
     }
 
   }

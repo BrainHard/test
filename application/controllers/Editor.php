@@ -9,6 +9,7 @@
         $this->load->model('profiles_model');
         $this->load->helper('form');
         $this->load->helper('text');
+        $this->load->library('image_lib');
 
     }
 
@@ -38,52 +39,80 @@
     public function add_user()
     {
       $post = $this->input->post();
-      $this->profiles_model->addProfile($post);
+      $slug = strtolower(convert_accented_characters($post['surname']));
+      $slug = $this->profiles_model->slugUnique($slug);
 
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 100;
-            $config['max_width']            = 1500;
-            $config['max_height']           = 1500;
+      $config['upload_path']          = './uploads/';
+      $config['allowed_types']        = 'gif|jpg|png';
+      $config['max_size']             = 100;
+      $config['max_width']            = 1500;
+      $config['max_height']           = 1500;
+      $config['file_name']            = $slug;
 
-            $this->load->library('upload', $config);
+      $this->load->library('upload', $config);
 
-            if ( ! $this->upload->do_upload('avatar'))
-            {
-                    $error = array('error' => $this->upload->display_errors());
-                    $this->load->view('add', $error);
-            }
-            else
-            {
-                    $data = array('upload_data' => $this->upload->data());
+      $image = '/uploads/' . $slug . '.png';
 
-                    $this->load->view('add_success', $data);
-            }
+      if ( ! $this->upload->do_upload('avatar'))
+      {
+              $this->profiles_model->editProfile($post, $slug);
+              $this->load->view('add_success');
+      }
+      else
+      {
+              $image_data =   $this->upload->data();
+
+              $configer =  array(
+                'image_library'   => 'gd2',
+                'source_image'    =>  $image_data['full_path'],
+                'maintain_ratio'  =>  TRUE,
+                'width'           =>  350,
+                'height'          =>  500,
+              );
+              $this->image_lib->clear();
+              $this->image_lib->initialize($configer);
+              $this->image_lib->resize();
+              $this->profiles_model->editProfile($post, $slug, $image);
+              $this->load->view('add_success');
+      }
     }
 
     public function edit_user($slug = NULL)
     {
       $post = $this->input->post();
-      $this->profiles_model->editProfile($post, $slug);
 
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 100;
             $config['max_width']            = 1500;
             $config['max_height']           = 1500;
+            $config['file_name']            = $slug;
 
             $this->load->library('upload', $config);
 
+            $image = '/uploads/' . $slug . '.png';
+
             if ( ! $this->upload->do_upload('avatar'))
             {
-                    $error = array('error' => $this->upload->display_errors());
-                    $this->load->view('edit', $error);
+                    $this->profiles_model->editProfile($post, $slug);
+                    $this->load->view('edit_success');
             }
             else
             {
-                    $data = array('upload_data' => $this->upload->data());
+                    $image_data =   $this->upload->data();
 
-                    $this->load->view('edit_success', $data);
+                    $configer =  array(
+                      'image_library'   => 'gd2',
+                      'source_image'    =>  $image_data['full_path'],
+                      'maintain_ratio'  =>  TRUE,
+                      'width'           =>  350,
+                      'height'          =>  500,
+                    );
+                    $this->image_lib->clear();
+                    $this->image_lib->initialize($configer);
+                    $this->image_lib->resize();
+                    $this->profiles_model->editProfile($post, $slug, $image);
+                    $this->load->view('edit_success');
             }
     }
   }

@@ -60,4 +60,5 @@ $route['profiles/(:num)'] = 'profiles/$1';
 $route['editor'] = 'editor';
 $route['editor/add'] = 'editor/add';
 $route['editor/edit/(:any)'] = 'editor/edit/$1';
+$route['search'] = 'search';
 $route['search/(:any)'] = 'search/$1';

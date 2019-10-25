@@ -1,6 +1,5 @@
 <h1>Редактировать анкету</h1>
 <div class="col-lg-12 form-container">
-  <?php var_dump($_FILES['avatar']['name']); ?>
   <?php echo $error;?>
   <?php echo form_open_multipart('editor/edit_user/' . $slug) ?>
   <p><?php echo form_input(['name' => 'name', 'placeholder' => 'Введите имя', 'class' => 'edit-input', 'value' => $profile['name']]) ?></p>

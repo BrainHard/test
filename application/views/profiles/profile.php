@@ -9,6 +9,6 @@
     <p><b>Адрес:</b> <?php echo $address ?></p>
     <p><b>Номер телефона:</b> <?php echo $phone ?></p>
     <p><b>Email:</b> <?php echo $email ?></p>
-    <p><a href="<?php echo $edit_link ?>">EDIT</a></p>
+    <p><a href="<?php echo $edit_link ?>">Редактировать</a></p>
   </div>
 </div>

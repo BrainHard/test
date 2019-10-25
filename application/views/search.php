@@ -2,10 +2,7 @@
   <div class="col-sm-4">
     <h1><?php echo $title ?></h1>
   </div>
-  <div class="col-sm-4">
-    <h1><a href="<?php echo $add_link ?>"><?php echo $add_text ?></a></h1>
-  </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4 col-sm-offset-4">
     <div class="search-container">
       <?php echo form_open('search/searching') ?>
       <?php echo form_input(['name' => 'search', 'placeholder' => 'Поиск...', 'class' => 'search-input']) ?>
@@ -15,7 +12,7 @@
   </div>
   <div class="row">
     <?php foreach ($profiles as $profile): ?>
-      <a href="index.php/profiles/profile/<?php echo $profile['slug'] ?>"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+      <a href="<?php echo base_url() ?>index.php/profiles/profile/<?php echo $profile['slug'] ?>"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
         <div class="profiles-container">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 ">
@@ -28,8 +25,5 @@
       </div>
       </div></a>
     <?php endforeach; ?>
-  </div>
-  <div class="pagination col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <?php echo $pagination ?>
   </div>
 </div>
